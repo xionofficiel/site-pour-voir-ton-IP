@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IP Détectée !</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #0f0;
+      text-align: center;
+      padding: 50px;
+    }
+    .hack {
+      font-size: 2em;
+      margin: 20px;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    button {
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      margin: 20px;
+      cursor: pointer;
+    }
+    #ip {
+      font-size: 1.5em;
+      margin: 20px;
+      color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔒 SYSTÈME DE SÉCURITÉ 🔒</h1>
+  <p class="hack">ACCÈS DÉTECTÉ !</p>
+  <p>Veux-tu voir ton IP ? (C'est toi qui décides !)</p>
+  
+  <button onclick="getIP()">👁️ Voir mon IP</button>
+  <div id="ip"></div>
+
+  <script>
+    async function getIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        document.getElementById('ip').innerHTML = 
+          `<strong>⚡ IP DÉTECTÉE : ${data.ip}</strong><br>
+           <small>(Rien n'a été envoyé, c'est juste pour toi !)</small>`;
+      } catch (e) {
+        document.getElementById('ip').innerHTML = "Erreur de connexion...";
+      }
+    }
+  </script>
+
+  <p><small>Ce site est une démo éducative. Aucune donnée n'est collectée.</small></p>
+</body>
+</html>
